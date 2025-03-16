@@ -54,4 +54,23 @@ public class AsyncController {
     }
   } 
 
+   //Method for custom threads
+   @GetMapping("/custom-thread")
+   public @ResponseBody ResponseEntity<?> testController3() {
+     try {
+       
+       asyncConfig.asyncThreadPool();
+       asyncConfig.asyncThreadPool();
+      //  asyncConfig.asyncThreadPool();
+      //  asyncConfig.asyncThreadPool();
+      //  asyncConfig.asyncThreadPool();
+
+       return new ResponseEntity<>("Thread executed successfully", HttpStatus.OK);
+ 
+     } catch (Exception e) {
+       e.printStackTrace();
+       return new ResponseEntity<>("Thread failed to execute", HttpStatus.INTERNAL_SERVER_ERROR);
+     }
+   } 
+
 }

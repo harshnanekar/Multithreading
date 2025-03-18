@@ -10,10 +10,7 @@ This repository contains various examples and use cases of **multithreading** an
 - [Multithreading Techniques](#multithreading-techniques)
   - [1. Simple Multi-threading](#1-simple-multi-threading)
   - [2. Async with `@Async`](#2-async-with-async)
-  - [3. CompletableFuture for Parallel Execution](#3-completablefuture-for-parallel-execution)
-  - [4. Using `ExecutorService` for Thread Management](#4-using-executorservice-for-thread-management)
-  - [5. Synchronous and Asynchronous Combination](#5-synchronous-and-asynchronous-combination)
-  - [6. Using `@Async` with Return Types](#6-using-async-with-return-types)
+  - [3. Executor Service](#2-executor-service)
 - [How to Run](#how-to-run)
 - [License](#license)
 
@@ -27,4 +24,4 @@ This project demonstrates various patterns you can use in your applications to o
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/spring-boot-multithreading.git
+   git clone https://github.com/yourusername/multithreading.git

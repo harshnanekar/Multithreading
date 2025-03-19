@@ -4,13 +4,14 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import spring.multithreading.AsyncMethod.AsyncConfig;
 
 @RestController
 public class ExecutorServiceImpl {
@@ -49,7 +50,11 @@ public class ExecutorServiceImpl {
     @GetMapping("/execute-service-test1")
     public ResponseEntity<?> executeTest1() {
         try {
-            ExecutorService executorService = Executors.newFixedThreadPool(3);
+            // ExecutorService executorService = Executors.newFixedThreadPool(3);
+
+           ExecutorService executorService = new ThreadPoolExecutor(3, 
+           5, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<>(10), new ThreadPoolExecutor.CallerRunsPolicy());
+           
 
             Future<String> result = executorService.submit(() -> {
                 try {

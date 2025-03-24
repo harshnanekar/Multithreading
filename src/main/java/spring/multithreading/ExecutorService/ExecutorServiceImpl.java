@@ -126,10 +126,11 @@ public class ExecutorServiceImpl {
                     try {
                         semaphore.acquire();
                         Thread.sleep(5000);
-                        System.out.println("Thread executed " + Thread.currentThread().getName() + Thread.currentThread().getId());
+                        System.out.println(
+                                "Thread executed " + Thread.currentThread().getName() + Thread.currentThread().getId());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    }finally {
+                    } finally {
                         semaphore.release();
                     }
                 });

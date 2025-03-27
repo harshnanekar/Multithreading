@@ -1,5 +1,8 @@
 package spring.multithreading.ExecutorService;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -151,4 +154,78 @@ public class ExecutorServiceImpl {
         }
     }
 
+    //Method for invoke all
+    @GetMapping("/execute-invoke-all")
+    public ResponseEntity<?> executeInvoke() {
+        try {
+            ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+            List<Callable<String>> task = new ArrayList<>();
+            task.add(() -> {
+                Thread.sleep(5000);
+                return "Task 1 completed";
+            });
+            task.add(() -> {
+                Thread.sleep(5000);
+                return "Task 2 completed";
+            });
+            task.add(() -> {
+                Thread.sleep(5000);
+                return "Task 3 completed";
+            });
+            task.add(() -> {
+                Thread.sleep(5000);
+                return "Task 4 completed";
+            });
+            task.add(() -> {
+                Thread.sleep(5000);
+                return "Task 5 completed";
+            });
+            task.add(() -> {
+                Thread.sleep(5000);
+                return "Task 6 completed";
+            });
+
+            List<Future<String>> future = executorService.invokeAll(task);
+
+            for (Future<String> future2 : future) {
+                future2.get();
+                System.out.println("Thread completed task: " + Thread.currentThread().getName() + future2.resultNow());
+            }
+
+            return new ResponseEntity<>("Thread Executed Successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("failed To Execute Thread", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //Method for invoke
+    @GetMapping("/execute-invoke-any")
+    public ResponseEntity<?> executeInvokeAny() {
+        try {
+            ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+            List<Callable<String>> task = List.of(
+                    () -> {
+                        Thread.sleep(5000);
+                        return "Task 1 completed";
+                    },
+                    () -> {
+                        Thread.sleep(5000);
+                        return "Task 2 completed";
+                    },
+                    () -> {
+                        Thread.sleep(5000);
+                        return "Task 3 completed";
+                    });
+
+            String future = executorService.invokeAny(task);
+            System.out.println("Thread completed task: " + Thread.currentThread().getName() + future);
+
+            return new ResponseEntity<>("Thread Executed Successfully", HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>("failed To Execute Thread", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

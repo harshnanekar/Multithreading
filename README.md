@@ -25,3 +25,11 @@ This project demonstrates various patterns you can use in your applications to o
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/multithreading.git
+
+
+@Async	Simple asynchronous execution
+ExecutorService	Manual thread pool management
+CompletableFuture	Advanced async processing
+ThreadPoolTaskExecutor	Spring’s thread pooling mechanism
+ForkJoinPool	Parallel recursive computation
+Reactor (WebFlux)	Reactive, non-blocking programming
